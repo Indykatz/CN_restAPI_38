@@ -14,8 +14,8 @@ exports.signUp = async (req, res) => {
 // Get all users
 exports.findAll = async (req, res) => {
   try {
-    const users = await User.find({});
-    res.send(users);
+    const users = await User.find(req.body);
+    res.send({ users });
   } catch (error) {
     console.log(error);
     res.send({ error });
@@ -23,15 +23,15 @@ exports.findAll = async (req, res) => {
 };
 
 // Update a users
-exports.updateUser = async (req, res) => {
-  try {
-    const users = await User.deleteOne(req.userName);
-    res.send(users);
-  } catch (error) {
-    console.log(error);
-    res.send({ error });
-  }
-};
+// exports.updateUser = async (req, res) => {
+//   try {
+//     const users = await User.updateOne(req.body);
+//     res.send(users);
+//   } catch (error) {
+//     console.log(error);
+//     res.send({ error });
+//   }
+// };
 
 // Delete a User
 exports.deleteUser = async (req, res) => {
