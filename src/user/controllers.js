@@ -34,12 +34,12 @@ exports.findAll = async (req, res) => {
 // };
 
 // Delete a User
-// exports.deleteUser = async (req, res) => {
-//   const removeUser = await User.deleteOne(req.body);
-//   res.send({ user: removeUser });
-//   try {
-//   } catch (error) {
-//     console.log(error);
-//     res.send({ error });
-//   }
-// };
+exports.deleteUser = async (req, res) => {
+  const removeUser = await User.deleteOne(req.body);
+  res.send({ user: removeUser });
+  try {
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
+  }
+};
