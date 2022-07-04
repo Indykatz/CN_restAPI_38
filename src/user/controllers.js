@@ -25,7 +25,7 @@ exports.findAll = async (req, res) => {
 // Update a users
 // exports.updateUser = async (req, res) => {
 //   try {
-//     const users = await User.updateOne(req.body);
+//     const users = await User.update(req.body);
 //     res.send(users);
 //   } catch (error) {
 //     console.log(error);
@@ -34,12 +34,12 @@ exports.findAll = async (req, res) => {
 // };
 
 // Delete a User
-exports.deleteUser = async (req, res) => {
-  const removeUser = await User.deleteOne(req.body);
-  res.send({ user: removeUser });
-  try {
-  } catch (error) {
-    console.log(error);
-    res.send({ error });
-  }
-};
+// exports.deleteUser = async (req, res) => {
+//   const removeUser = await User.deleteOne(req.body);
+//   res.send({ user: removeUser });
+//   try {
+//   } catch (error) {
+//     console.log(error);
+//     res.send({ error });
+//   }
+// };
