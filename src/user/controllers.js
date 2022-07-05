@@ -24,13 +24,9 @@ exports.findAll = async (req, res) => {
 
 // Update a users
 exports.updateUser = async (req, res) => {
+  const userEdits = await User.updateOne(req.body);
+  res.send({ users: userEdits });
   try {
-    const theUser = req.body.username;
-    const newData = {
-      $set: { user: req.body },
-    };
-    const users = await User.updateOne(theUser, newData);
-    res.send(users);
   } catch (error) {
     console.log(error);
     res.send({ error });
