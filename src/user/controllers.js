@@ -23,21 +23,42 @@ exports.findAll = async (req, res) => {
 };
 
 // Update a users
-// exports.updateUser = async (req, res) => {
-//   try {
-//     const users = await User.update(req.body);
-//     res.send(users);
-//   } catch (error) {
-//     console.log(error);
-//     res.send({ error });
-//   }
-// };
+exports.updateUser = async (req, res) => {
+  try {
+    const theUser = req.body.username;
+    const newData = {
+      $set: { user: req.body },
+    };
+    const users = await User.updateOne(theUser, newData);
+    res.send(users);
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
+  }
+};
 
 // Delete a User
 exports.deleteUser = async (req, res) => {
   const removeUser = await User.deleteOne(req.body);
   res.send({ user: removeUser });
   try {
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
+  }
+};
+
+exports.login = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      username: req.body.username,
+      password: req.body.password,
+    });
+    if (!user) {
+      throw new Error("Incorrect credentials");
+    } else {
+      res.send({ user });
+    }
   } catch (error) {
     console.log(error);
     res.send({ error });
