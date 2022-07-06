@@ -24,17 +24,12 @@ exports.findAll = async (req, res) => {
 
 // Update a users
 exports.updateUser = async (req, res) => {
-  // const search = { username: req.body.username };
-  // const newData = {
-  //   username: req.body.username,
-  //   email: req.body.email,
-  // };
-  const userEdits = await User.updateOne(
-    req.body.filterObj,
-    req.body.updateObj
-  );
-  res.send({ user: userEdits });
   try {
+    const userEdits = await User.updateOne(
+      req.body.filterObj,
+      req.body.updateObj
+    );
+    res.send({ user: userEdits });
   } catch (error) {
     console.log(error);
     res.send({ error });
