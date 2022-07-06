@@ -17,7 +17,7 @@ userRouter.get("/user", findAll); // defining a get request on /user path
 
 userRouter.patch("/user", updateUser); // defining a patch request on /user path
 
-userRouter.delete("/user", deleteUser); // defining a delete request on /user path
+userRouter.delete("/user/:username", deleteUser); // defining a delete request on /user path
 
 userRouter.post("/login", login); //defining a post request on /login path, that calls the login controller
 

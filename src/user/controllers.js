@@ -24,13 +24,16 @@ exports.findAll = async (req, res) => {
 
 // Update a users
 exports.updateUser = async (req, res) => {
-  const search = { username: req.body.username };
-  const newData = {
-    username: req.body.username,
-    email: req.body.email,
-  };
-  const userEdits = await User.updateOne(search, newData);
-  res.send({ users: userEdits });
+  // const search = { username: req.body.username };
+  // const newData = {
+  //   username: req.body.username,
+  //   email: req.body.email,
+  // };
+  const userEdits = await User.updateOne(
+    req.body.filterObj,
+    req.body.updateObj
+  );
+  res.send({ user: userEdits });
   try {
   } catch (error) {
     console.log(error);
@@ -40,9 +43,9 @@ exports.updateUser = async (req, res) => {
 
 // Delete a User
 exports.deleteUser = async (req, res) => {
-  const removeUser = await User.deleteOne(req.body);
-  res.send({ user: removeUser });
   try {
+    const removeUser = await User.deleteOne({ username: req.params.username });
+    res.send({ user: removeUser });
   } catch (error) {
     console.log(error);
     res.send({ error });
