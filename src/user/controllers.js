@@ -1,9 +1,9 @@
 const User = require("./model");
 
-// request object and response object aka req and res - C create
+// Create
 exports.signUp = async (req, res) => {
   try {
-    const newUser = await User.create(req.body); // req.body is an object that contains k/v pairs that match user model
+    const newUser = await User.create(req.body); //req.body is an object that contains k/v pairs that match my User model
     res.send({ user: newUser });
   } catch (error) {
     console.log(error);
@@ -24,7 +24,12 @@ exports.findAll = async (req, res) => {
 
 // Update a users
 exports.updateUser = async (req, res) => {
-  const userEdits = await User.updateOne(req.body);
+  const search = { username: req.body.username };
+  const newData = {
+    username: req.body.username,
+    email: req.body.email,
+  };
+  const userEdits = await User.updateOne(search, newData);
   res.send({ users: userEdits });
   try {
   } catch (error) {
@@ -44,6 +49,7 @@ exports.deleteUser = async (req, res) => {
   }
 };
 
+// Login
 exports.login = async (req, res) => {
   try {
     const user = await User.findOne({
