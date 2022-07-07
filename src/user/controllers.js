@@ -15,7 +15,26 @@ exports.signUp = async (req, res) => {
 exports.findAll = async (req, res) => {
   try {
     const users = await User.find(req.body);
-    res.send({ users });
+    if (!users) {
+      throw new Error("User not found");
+    } else {
+      res.send({ users });
+    }
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
+  }
+};
+
+// Get all users
+exports.findUser = async (req, res) => {
+  try {
+    const users = await User.findOne({ username: req.params.username });
+    if (!users) {
+      throw new Error("User not found");
+    } else {
+      res.send({ users });
+    }
   } catch (error) {
     console.log(error);
     res.send({ error });
