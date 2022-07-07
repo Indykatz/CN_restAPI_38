@@ -28,3 +28,18 @@ exports.passCompare = async (req, res, next) => {
     res.send({ error });
   }
 };
+
+exports.tokenCheck = async (req, res, next) => {
+  try {
+    // const token = req.header("Authorization"); //grab token from Authorization header in the request
+    const decodedToken = jwt.verify(
+      req.header("Authorization"),
+      process.env.SECRET
+    ); //decode token using same secret that created the token
+    req.user = await User.findById(decodedToken.id); //finding the user by their id, stored in the token
+    next();
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
+  }
+};

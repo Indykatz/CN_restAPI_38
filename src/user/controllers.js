@@ -1,4 +1,4 @@
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const User = require("./model");
 
 // Create
@@ -6,8 +6,9 @@ exports.signUp = async (req, res) => {
   try {
     const newUser = await User.create(req.body); //req.body is an object that contains k/v pairs that match my User model
     // sign method creates a token with object payload hidden
-    const token = jwt.sign({ id: newUser._id }, process.env.secret);
+    const token = jwt.sign({ id: newUser._id }, process.env.SECRET);
     console.log(token);
+    // token - goes in below
     res.send({ user: newUser, token });
   } catch (error) {
     console.log(error);
