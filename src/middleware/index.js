@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const User = require("../user/model");
+const jwt = require("jsonwebtoken");
 
 exports.hashPass = async (req, res, next) => {
   try {
@@ -16,21 +17,12 @@ exports.hashPass = async (req, res, next) => {
 
 exports.passCompare = async (req, res, next) => {
   try {
-    const theUser = await User.findOne({ username: req.body.username });
-    // console.log(theUser.password);
-    // const enteredPWord = req.body.password;
-    // console.log(enteredPWord);
-    const hashedPass = await bcrypt.compare(
-      req.body.password,
-      theUser.password
-    );
-    // console.log(hashedPass);
-    // console.log(theUser);
-    if (hashedPass) {
-      req.body.password = theUser.password;
+    req.user = await User.findOne({ username: req.body.username });
+    if (await bcrypt.compare(req.body.password, req.user.password)) {
+      next();
+    } else {
+      throw new Error("Incorrect credentails");
     }
-
-    next();
   } catch (error) {
     console.log(error);
     res.send({ error });

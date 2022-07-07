@@ -1,10 +1,14 @@
+// const jwt = require("jsonwebtoken");
 const User = require("./model");
 
 // Create
 exports.signUp = async (req, res) => {
   try {
     const newUser = await User.create(req.body); //req.body is an object that contains k/v pairs that match my User model
-    res.send({ user: newUser });
+    // sign method creates a token with object payload hidden
+    const token = jwt.sign({ id: newUser._id }, process.env.secret);
+    console.log(token);
+    res.send({ user: newUser, token });
   } catch (error) {
     console.log(error);
     res.send({ error });
@@ -26,7 +30,7 @@ exports.findAll = async (req, res) => {
   }
 };
 
-// Get all users
+// Get a users
 exports.findUser = async (req, res) => {
   try {
     const users = await User.findOne({ username: req.params.username });
@@ -69,14 +73,14 @@ exports.deleteUser = async (req, res) => {
 // Login
 exports.login = async (req, res) => {
   try {
-    const user = await User.findOne({
-      username: req.body.username,
-      password: req.body.password,
-    });
-    if (!user) {
+    // const user = await User.findOne({
+    //   username: req.body.username,
+    //   password: req.body.password,
+    // });
+    if (!req.user) {
       throw new Error("Incorrect credentials");
     } else {
-      res.send({ user });
+      res.send({ user: req.user });
     }
   } catch (error) {
     console.log(error);
