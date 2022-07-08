@@ -1,4 +1,5 @@
 # CN_restAPI_38
+
 ## Indykatz
 
 <!-- Folders / Files  -->
@@ -75,3 +76,20 @@ json content example
 - Get npm imports
 - token - where its used and how ?
 - Security - making changes wih token ?
+
+<!-- Token -->
+
+{
+"username": "A_User",
+"email": "user@email.com",
+"password": "1234"
+}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzdmNDVmMDJjMjcwNmI2YWQ1ZGMwMSIsImlhdCI6MTY1NzI3MTM5MX0.VWXePWlxl6o7YswuVhvlJ6blmxrV8SNo_YqEwjRL308
+
+{
+    "username": "The-User",
+    "email": "theuser@email.com",
+    "password": "1234"
+}
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzgwZDBmMDJjMjcwNmI2YWQ1ZGMwNSIsImlhdCI6MTY1NzI3NzcxMX0.5TLbdoFlFz-QYGSSMI7W-2R2cJzgPs5DoTv1LibXxpE
