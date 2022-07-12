@@ -74,7 +74,7 @@ exports.updateUser = async (req, res) => {
       req.body.filterObj,
       req.body.updateObj
     );
-    // rsen user objecj as response
+    // res user object as response
     res.send({ user: userEdits });
     //  catch ...
   } catch (error) {
