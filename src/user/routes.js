@@ -14,7 +14,7 @@ const userRouter = Router(); //create a router that can have endpoints added to 
 
 userRouter.post("/user", hashPass, signUp); //defining a post request on /user path, that calls the signUp controller
 
-userRouter.get("/user", findAll); // defining a get request on /user path
+userRouter.get("/users", findAll); // defining a get request on /user path
 
 userRouter.get("/findUser/:username", findUser); // defining a get request on /findUser path
 
